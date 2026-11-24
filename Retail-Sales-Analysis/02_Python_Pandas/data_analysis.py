@@ -1,0 +1,13 @@
+import pandas as pd
+df=pd.read_csv("../01_Raw_Data/Superstore.csv",encoding="latin1")
+print(df.isnull().sum())
+print(df.duplicated().sum())
+df["Order Date"]=pd.to_datetime(df["Order Date"],format="%d-%m-%Y")
+df["Ship Date"]=pd.to_datetime(df["Ship Date"],format="%d-%m-%Y")
+print(df[["Order Date","Ship Date"]].dtypes)
+print("All columns:")
+print(df.columns.to_list())
+df1=df.drop(columns="Row ID")
+print(df1)
+print(df1.shape)
+df1.to_csv("../02_Python_Pandas/cleaned_sales_data.csv",index=False)
